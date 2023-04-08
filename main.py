@@ -117,12 +117,7 @@ try:
         user_set['label'] = pd.Categorical(user_set['label'], categories=emotion_map.values())
         
         emotion = user_set['label'].value_counts().idxmax()
-        
 
-        sns.countplot(x='label', data=user_set)
-        plt.title('Distribution of mental health states')
-        plt.ylabel('Count')
-        
         # midi_path = (make_music(get_key(get_ma_mi(user_set))))
         # midi_audio = AudioSegment.from_file(midi_path, format="mid")
         # play(midi_audio)
