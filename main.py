@@ -30,6 +30,7 @@ st.write('Mood Music')
 filename = 'sentiment_model.pkl'
 clf = pickle.load(open(filename, 'rb'))
 
+
 tokenizer = AutoTokenizer.from_pretrained('tokenizer_info')
 
 with open('tfidf_vectorizer.pkl', 'rb') as f:
