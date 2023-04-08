@@ -19,16 +19,34 @@ import pandas as pd
 import seaborn as sns
 import os
 from config import API_KEY
+from transformers import AutoTokenizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 os.environ["OPENAI_API_KEY"] = API_KEY
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
 st.write('Mood Music')
 
-filename = '4_class_model.pkl'
+filename = 'sentiment_model.pkl'
 clf = pickle.load(open(filename, 'rb'))
 
+tokenizer = AutoTokenizer.from_pretrained('tokenizer_info')
 
+with open('tfidf_vectorizer.pkl', 'rb') as f:
+    vectorizer = pickle.load(f)
+
+def preprocess_input_text(text):
+        # Tokenize input text
+        encoded_text = tokenizer.encode(text, padding=True, truncation=True, return_tensors='tf')
+        encoded_text = encoded_text.numpy()
+
+        # Convert encoded text back into words
+        words = [tokenizer.decode([token]) for token in encoded_text[0]]
+        input_text = ' '.join(words)
+        
+        vector = vectorizer.transform([input_text])
+
+        return vector
 
 try:
     user_set = st.file_uploader("upload file", type={"csv"})
@@ -78,8 +96,11 @@ try:
 
         for i, row in user_set.iterrows():
             text = row['text']
+            vector = preprocess_input_text(text)
             prediction = clf.predict([text])[0]
             user_set.loc[i, 'label'] = prediction
+            
+            
         
         st.write('now')
         st.write(user_set)
