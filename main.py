@@ -101,12 +101,19 @@ try:
             file_name='music.mid',
             mime='audio/midi')
 
+        # predict
         for i, row in user_set.iterrows():
-            text = row['text']
-            vector = preprocess_input_text(text)
-            prediction = clf.predict([text])[0]
-            user_set.loc[i, 'label'] = prediction
+            processed_text = preprocess_input_text(row['text'])
+            prediction = clf.predict(processed_text)
+            user_set.loc[i, 'predictions'] = prediction
             
+        # plot
+        ax = sns.countplot(x='label', data=user_set['predictions'])
+        plt.title('Distribution of mental health states')
+        plt.xticks([0, 1, 2, 3], ['joy', 'fear', 'anger', 'sadness'])
+        plt.ylabel('Count')
+        st.pyplot(ax.figure)
+
             
         
         st.write('now')
