@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 import os
-from configure import API_KEY
+# from configure import API_KEY
 # import tensorflow as tf
 from transformers import AutoTokenizer
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -19,7 +19,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 # os.environ["OPENAI_API_KEY"] = API_KEY
 # openai.api_key = os.environ["OPENAI_API_KEY"]
 
-os.environ["OPENAI_API_KEY"] = API_KEY
+os.environ["OPENAI_API_KEY"] = st.secrets['API_KEY']
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
 st.write('Mood Music')
