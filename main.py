@@ -22,8 +22,11 @@ from transformers import AutoTokenizer
 os.environ["OPENAI_API_KEY"] = st.secrets['APIKEY']
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
-st.image("https://cdn.discordapp.com/attachments/1021852803905359984/1094549582622502932/final_music_mood_logo.png")
+st.image("https://cdn.discordapp.com/attachments/1021852803905359984/1094550872094146620/final_music_mood_logo.jpg")
 st.header('Mood Music')
+st.markdown('Making a *safer* mental health space, powered by AI.')
+
+st.markdown(':orange[Upload your message history.]')
 
 #sdfghjk
 
@@ -55,6 +58,7 @@ try:
     user_set = pd.read_csv(user_set)
     user_set.drop('label', axis=1, inplace=True)
     
+    st.markdown(':orange[Get an artistic rendering of your mental health state, with audio and visuals!]')
     submit = st.button('Submit')
     
     if submit:    
@@ -122,30 +126,31 @@ try:
             2: 'anger',
             3: 'sadness',
         }
+        
+        st.write('See your mental health analysis message-by-message:')
 
         user_set['predictions'] = user_set['predictions'].map(lambda x: emotion_map[x])       
         st.write(user_set)
         user_set['predictions'] = pd.Categorical(user_set['predictions'], categories=emotion_map.values())
         
         emotion = user_set['predictions'].value_counts().idxmax()
-        st.write(f'Your mental state is dominated by {emotion}.')
+        st.subheader(f'Your mental state is dominated by {emotion}.')
         
         # generate prompt
         
         def generate_response(prompt):
-            st.write('is this being called?')
             response = openai.Completion.create(
                 engine="text-davinci-003",
                 prompt=prompt,
                 max_tokens=30,
                 n=1,
                 stop=None,
-                temperature=0.5,
+                temperature=0.6,
             )
             
             return response.choices[0].text
 
-        string = f"Give a caption for an image that is a metaphorical symbol of {emotion}:"
+        string = f"Give a caption for an image that is a creative metaphorical symbol of {emotion}:"
         suggested_response = generate_response(string)
         suggested_response = suggested_response.split(":")[0]
         # suggested_response = suggested_response.strip().replace("'", "")    
@@ -161,9 +166,9 @@ try:
         
         image_url = response['data'][0]['url']
         
-        st.write(image_url)
+        st.image(image_url, caption=suggested_response)  
         
-        st.image(image_url, caption=suggested_response)        
+        st.markdown(':orange[Mental health is a journey for everyone! Share your image, audio, and how you\'re doing on social media or click submit again to regenerate.]')      
     
 except:
     pass
