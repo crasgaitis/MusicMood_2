@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 import os
-from config import API_KEY
+from configure import API_KEY
 import tensorflow as tf
 from transformers import AutoTokenizer
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -175,6 +175,11 @@ try:
         
         st.write('response below')
         st.write(suggested_response)    
+        
+        
+        # image gen
+        
+        
     
 except:
     pass
