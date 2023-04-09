@@ -126,7 +126,7 @@ try:
         st.write(user_set)
         user_set['predictions'] = pd.Categorical(user_set['predictions'], categories=emotion_map.values())
         
-        emotion = user_set['label'].value_counts().idxmax()
+        emotion = user_set['predictions'].value_counts().idxmax()
         st.write(f'Your mental state is dominated by {emotion}.')
 
         # midi_path = (make_music(get_key(get_ma_mi(user_set))))
