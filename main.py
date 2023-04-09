@@ -18,7 +18,7 @@ from transformers import AutoTokenizer
 # os.environ["OPENAI_API_KEY"] = API_KEY
 # openai.api_key = os.environ["OPENAI_API_KEY"]
 
-os.environ["OPENAI_API_KEY"] = st.secrets['API_KEY']
+os.environ["OPENAI_API_KEY"] = st.secrets['APIKEY']
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
 st.write('Mood Music')
