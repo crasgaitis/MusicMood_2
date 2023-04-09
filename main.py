@@ -19,6 +19,7 @@ import pandas as pd
 import seaborn as sns
 import os
 from config import API_KEY
+import tensorflow as tf
 from transformers import AutoTokenizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -104,6 +105,7 @@ try:
         
         for i, row in user_set.iterrows():
             st.write(i)
+            st.write(row['text'])
             processed_text = preprocess_input_text(row['text'])
             st.write('did preproc')
             st.write(processed_text)
