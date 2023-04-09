@@ -26,24 +26,24 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 # os.environ["OPENAI_API_KEY"] = API_KEY
 # openai.api_key = os.environ["OPENAI_API_KEY"]
 
-# os.environ["OPENAI_API_KEY"] = API_KEY
-# openai.api_key = os.environ["OPENAI_API_KEY"]
+os.environ["OPENAI_API_KEY"] = API_KEY
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
-# st.write('Mood Music')
+st.write('Mood Music')
 
 
 
-# prompt = "Hello, OpenAI!"
+prompt = "Hello, OpenAI!"
 
-# # Call the OpenAI API to generate a response
-# response = openai.Completion.create(
-#   engine="davinci",
-#   prompt=prompt,
-#   max_tokens=10,
-# )
+# Call the OpenAI API to generate a response
+response = openai.Completion.create(
+  engine="davinci",
+  prompt=prompt,
+  max_tokens=10,
+)
 
-# # Print the generated text
-# st.write(response.choices[0].text)
+# Print the generated text
+st.write(response.choices[0].text)
 
 
 
