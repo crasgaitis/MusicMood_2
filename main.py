@@ -132,7 +132,7 @@ try:
         st.write('See your mental health analysis message-by-message:')
 
         user_set['predictions'] = user_set['predictions'].map(lambda x: emotion_map[x])       
-        st.write(user_set)
+        st.dataframe(user_set, height = 150)
         user_set['predictions'] = pd.Categorical(user_set['predictions'], categories=emotion_map.values())
         
         emotion = user_set['predictions'].value_counts().idxmax()
