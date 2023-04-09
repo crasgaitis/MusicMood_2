@@ -51,23 +51,18 @@ with open('tfidf_vectorizer.pkl', 'rb') as f:
         return vector
 
 try:
-    st.write('begin try')
     user_set = st.file_uploader("upload file", type={"csv"})
     user_set = pd.read_csv(user_set)
     user_set.drop('label', axis=1, inplace=True)
-
-    st.write('try')
     
     submit = st.button('Go')
     
     if submit:    
-        analyze(user_set) 
-        st.write('submitted') 
-        st.write(user_set)
+        analyze(user_set)  
+        # st.write(user_set)
         
         key_input = (get_key(get_ma_mi(user_set)))
         st.write(key_input)
-        # thing
         
         key_str = key_input
         key_obj = key.Key(key_str)
@@ -101,7 +96,7 @@ try:
 
         # predict
         
-        st.write('loading')
+        st.write('loading...')
         
         for row in user_set.itertuples():
             i = row.Index
@@ -109,8 +104,6 @@ try:
             processed_text = preprocess_input_text(text)
             prediction = clf.predict(processed_text)
             user_set.loc[i, 'predictions'] = prediction
-            
-        st.write('done')
             
         # plot
         fig, ax = plt.subplots()
@@ -131,10 +124,11 @@ try:
             'sadness' : 3,
         }
 
-        user_set['label'] = user_set['label'].map(lambda x: emotion_map[x])
-        user_set['label'] = pd.Categorical(user_set['label'], categories=emotion_map.values())
+        user_set['predictions'] = user_set['predictions'].map(lambda x: emotion_map[x])
+        user_set['predictions'] = pd.Categorical(user_set['predictions'], categories=emotion_map.values())
         
         emotion = user_set['label'].value_counts().idxmax()
+        st.write(f'Your mental state is dominated by {emotion}.')
 
         # midi_path = (make_music(get_key(get_ma_mi(user_set))))
         # midi_audio = AudioSegment.from_file(midi_path, format="mid")
