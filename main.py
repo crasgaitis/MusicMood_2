@@ -56,8 +56,10 @@ try:
     st.write('begin try')
     user_set = st.file_uploader("upload file", type={"csv"})
     user_set = pd.read_csv(user_set)
-    user_set.drop('label')
+    user_set.drop('label', axis=1, inplace=True)
+
     st.write('try')
+    
     submit = st.button('Go')
     
     if submit:    
