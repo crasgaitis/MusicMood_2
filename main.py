@@ -23,7 +23,7 @@ os.environ["OPENAI_API_KEY"] = st.secrets['APIKEY']
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
 st.image("https://cdn.discordapp.com/attachments/1021852803905359984/1094550872094146620/final_music_mood_logo.jpg")
-st.header('Mood Music')
+st.header('Music Mood')
 st.markdown('Making a *safer* mental health space, powered by AI.')
 
 st.markdown(':orange[Upload your message history.]')
@@ -56,7 +56,7 @@ def preprocess_input_text(text):
 try:
     user_set = st.file_uploader("upload file", type={"csv"})
     user_set = pd.read_csv(user_set)
-    user_set.drop('label', axis=1, inplace=True)
+    # user_set.drop('label', axis=1, inplace=True)
     
     st.markdown(':orange[Get an artistic rendering of your mental health state, with audio and visuals!]')
     submit = st.button('Submit')
