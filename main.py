@@ -36,10 +36,10 @@ tokenizer = AutoTokenizer.from_pretrained('tokenizer_info')
 with open('tfidf_vectorizer.pkl', 'rb') as f:
     vectorizer = pickle.load(f)
 
-def preprocess_input_text(text):
+    def preprocess_input_text(text):
         # Tokenize input text
-        encoded_text = tokenizer(text, padding=True, truncation=True, return_tensors='tf')
-        encoded_text = encoded_text['input_ids'].numpy()
+        encoded_text = tokenizer.encode(text, padding=True, truncation=True, return_tensors='tf')
+        encoded_text = encoded_text.numpy()
 
         # Convert encoded text back into words
         words = [tokenizer.decode([token]) for token in encoded_text[0]]
