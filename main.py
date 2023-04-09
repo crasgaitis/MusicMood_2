@@ -26,7 +26,7 @@ st.image("https://cdn.discordapp.com/attachments/1021852803905359984/10945508720
 st.header('Mood Music')
 st.markdown('Making a *safer* mental health space, powered by AI.')
 
-st.markdown(':orange[Upload your message history.]')
+st.markdown(':yellow[Upload your message history.]')
 
 #sdfghjk
 
@@ -58,7 +58,7 @@ try:
     user_set = pd.read_csv(user_set)
     user_set.drop('label', axis=1, inplace=True)
     
-    st.markdown(':orange[Get an artistic rendering of your mental health state, with audio and visuals!]')
+    st.markdown(':yellow[Get an artistic rendering of your mental health state, with audio and visuals!]')
     submit = st.button('Submit')
     
     if submit:    
@@ -66,7 +66,6 @@ try:
         # st.write(user_set)
         
         key_input = (get_key(get_ma_mi(user_set)))
-        st.write(key_input)
         
         key_str = key_input
         key_obj = key.Key(key_str)
@@ -96,7 +95,7 @@ try:
         midi_data.seek(0)
         
         st.download_button(
-            label='Download MIDI',
+            label='🎵 Download MIDI 🎵',
             data=midi_data.getvalue(),
             file_name='music.mid',
             mime='audio/midi')
@@ -168,7 +167,7 @@ try:
         
         st.image(image_url, caption=suggested_response)  
         
-        st.markdown(':orange[Mental health is a journey for everyone! Share your image, audio, and how you\'re doing on social media or click submit again to regenerate.]')      
+        st.markdown(':yellow[Mental health is a journey for everyone! Share your image, audio, and how you\'re doing on social media or click submit again to regenerate.]')      
     
 except:
     pass
