@@ -99,7 +99,7 @@ pandas==1.5.1
 patsy==0.5.3
 Pillow==9.4.0
 prompt-toolkit==3.0.31
-protobuf==3.9.2
+protobuf==3.20.1
 pyarrow==11.0.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
@@ -189,4 +189,4 @@ xgboost==1.7.5
 xxhash==3.2.0
 yarl==1.8.2
 zipp==3.13.0
-tensorflow == 2.10.0
+# tensorflow == 2.10.0

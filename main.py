@@ -12,7 +12,7 @@ import pandas as pd
 import seaborn as sns
 import os
 from configure import API_KEY
-import tensorflow as tf
+# import tensorflow as tf
 from transformers import AutoTokenizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
