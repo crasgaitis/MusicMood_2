@@ -114,17 +114,16 @@ try:
         st.pyplot(fig)
         
         st.write('now')
-        st.write(user_set)
-
-        
+      
         emotion_map = {
-            'joy' : 0,
-            'fear' : 1,
-            'anger' : 2,
-            'sadness' : 3,
+            0: 'joy',
+            1: 'fear',
+            2: 'anger',
+            3: 'sadness',
         }
 
-        user_set['predictions'] = user_set['predictions'].map(lambda x: emotion_map[x])
+        user_set['predictions'] = user_set['predictions'].map(lambda x: emotion_map[x])       
+        st.write(user_set)
         user_set['predictions'] = pd.Categorical(user_set['predictions'], categories=emotion_map.values())
         
         emotion = user_set['label'].value_counts().idxmax()
@@ -151,7 +150,7 @@ try:
         )
     
         string = f"Give a caption for an image that is a metaphorical symbol of {emotion}:"
-        
+        st.write(string)
         suggested_response = generate_response(string)
         suggested_response = suggested_response.split(":")[0]
         suggested_response = suggested_response.strip().replace("'", "")    
