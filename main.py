@@ -112,8 +112,6 @@ try:
         plt.xticks([0, 1, 2, 3], ['joy', 'fear', 'anger', 'sadness'])
         plt.ylabel('Count')
         st.pyplot(fig)
-        
-        st.write('now')
       
         emotion_map = {
             0: 'joy',
