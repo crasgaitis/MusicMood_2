@@ -103,10 +103,12 @@ try:
         
         st.write('loading')
         
-        for i, row in user_set.iterrows():
+        for row in user_set.itertuples():
+            i = row.Index
+            text = row.text
             st.write(i)
-            st.write(row['text'])
-            processed_text = preprocess_input_text(row['text'])
+            st.write(text)
+            processed_text = preprocess_input_text(text)
             st.write('did preproc')
             st.write(processed_text)
             prediction = clf.predict(processed_text)
