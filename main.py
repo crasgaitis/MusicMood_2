@@ -26,7 +26,7 @@ st.image("https://cdn.discordapp.com/attachments/1021852803905359984/10945508720
 st.header('Mood Music')
 st.markdown('Making a *safer* mental health space, powered by AI.')
 
-st.markdown(':yellow[Upload your message history.]')
+st.markdown(':orange[Upload your message history.]')
 
 #sdfghjk
 
@@ -58,7 +58,7 @@ try:
     user_set = pd.read_csv(user_set)
     user_set.drop('label', axis=1, inplace=True)
     
-    st.markdown(':yellow[Get an artistic rendering of your mental health state, with audio and visuals!]')
+    st.markdown(':orange[Get an artistic rendering of your mental health state, with audio and visuals!]')
     submit = st.button('Submit')
     
     if submit:    
@@ -113,10 +113,13 @@ try:
             
         # plot
         fig, ax = plt.subplots()
-        sns.countplot(x='predictions', data=user_set)
+        sns.countplot(x='predictions', data=user_set, palette = ['#EB54E5', '#5EB964', '#72ADEE', '#FEF258'])
         plt.title('Distribution of mental health states')
         plt.xticks([0, 1, 2, 3], ['joy', 'fear', 'anger', 'sadness'])
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
         plt.ylabel('Count')
+        plt.xlabel('')
         st.pyplot(fig)
       
         emotion_map = {
@@ -167,7 +170,7 @@ try:
         
         st.image(image_url, caption=suggested_response)  
         
-        st.markdown(':yellow[Mental health is a journey for everyone! Share your image, audio, and how you\'re doing on social media or click submit again to regenerate.]')      
+        st.markdown(':orange[Mental health is a journey for everyone! Share your image, audio, and how you\'re doing on social media or click submit again to regenerate.]')      
     
 except:
     pass
