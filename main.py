@@ -10,9 +10,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+import numpy as np
 import os
 # from configure import API_KEY
-# import tensorflow as tf
+import tensorflow as tf
 from transformers import AutoTokenizer
 
 # os.environ["OPENAI_API_KEY"] = API_KEY
