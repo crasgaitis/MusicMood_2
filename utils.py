@@ -2,10 +2,6 @@ from music21 import *
 import random
 import numpy as np
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from pydub import AudioSegment
-from pydub.playback import play
-import tempfile
-import pygame
 
 def get_key(type):
   if type == "major":
