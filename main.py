@@ -36,6 +36,8 @@ tokenizer = AutoTokenizer.from_pretrained('tokenizer_info')
 with open('tfidf_vectorizer.pkl', 'rb') as f:
     vectorizer = pickle.load(f)
 
+st.write('vectorier in')
+
 def preprocess_input_text(text):
         # Tokenize input text
         encoded_text = tokenizer.encode(text, padding=True, truncation=True, return_tensors='tf')
@@ -49,11 +51,13 @@ def preprocess_input_text(text):
 
         return vector
 
+st.write('test')
 try:
+    st.write('begin try')
     user_set = st.file_uploader("upload file", type={"csv"})
     user_set = pd.read_csv(user_set)
     user_set.drop('label')
-    
+    st.write('try')
     submit = st.button('Go')
     
     if submit:    
