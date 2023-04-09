@@ -106,22 +106,19 @@ try:
         for row in user_set.itertuples():
             i = row.Index
             text = row.text
-            st.write(i)
-            st.write(text)
             processed_text = preprocess_input_text(text)
-            st.write('did preproc')
-            st.write(processed_text)
             prediction = clf.predict(processed_text)
             user_set.loc[i, 'predictions'] = prediction
             
         st.write('done')
             
         # plot
-        fig, ax = sns.countplot(x='label', data=user_set['predictions'])
+        fig, ax = plt.subplots()
+        sns.countplot(x='predictions', data=user_set)
         plt.title('Distribution of mental health states')
         plt.xticks([0, 1, 2, 3], ['joy', 'fear', 'anger', 'sadness'])
         plt.ylabel('Count')
-        st.pyplot(ax.fig)
+        st.pyplot(fig)
         
         st.write('now')
         st.write(user_set)
