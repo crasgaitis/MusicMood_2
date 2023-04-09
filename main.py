@@ -105,6 +105,8 @@ try:
         for i, row in user_set.iterrows():
             st.write(i)
             processed_text = preprocess_input_text(row['text'])
+            st.write('did preproc')
+            st.write(processed_text)
             prediction = clf.predict(processed_text)
             user_set.loc[i, 'predictions'] = prediction
             
