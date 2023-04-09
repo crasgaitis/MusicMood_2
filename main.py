@@ -130,6 +130,7 @@ try:
         # generate prompt
         
         def generate_response(prompt):
+            st.write('is this being called?')
             response = openai.Completion.create(
                 engine="davinci",
                 prompt=prompt,
@@ -138,7 +139,8 @@ try:
                 stop=None,
                 temperature=0.5,
             )
-            
+            st.write(response.choices)
+            st.write(response.choices[0].text)
             return response.choices[0].text
 
     
