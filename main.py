@@ -117,13 +117,11 @@ try:
         st.write('done')
             
         # plot
-        ax = sns.countplot(x='label', data=user_set['predictions'])
+        fig, ax = sns.countplot(x='label', data=user_set['predictions'])
         plt.title('Distribution of mental health states')
         plt.xticks([0, 1, 2, 3], ['joy', 'fear', 'anger', 'sadness'])
         plt.ylabel('Count')
-        st.pyplot(ax.figure)
-
-            
+        st.pyplot(ax.fig)
         
         st.write('now')
         st.write(user_set)
