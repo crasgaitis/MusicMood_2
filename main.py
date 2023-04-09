@@ -55,7 +55,7 @@ with open('tfidf_vectorizer.pkl', 'rb') as f:
 
 def preprocess_input_text(text):
     # Tokenize input text
-    encoded_text = tokenizer.encode(text, padding=True, truncation=True, return_tensors='tf')
+    encoded_text = tokenizer.encode(text, padding=True, truncation=True, return_tensors='np')
     encoded_text = encoded_text.numpy()
 
     # Convert encoded text back into words
