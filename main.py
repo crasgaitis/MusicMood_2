@@ -24,24 +24,6 @@ openai.api_key = os.environ["OPENAI_API_KEY"]
 
 st.write('Mood Music')
 
-
-
-# prompt = "Hello, OpenAI!"
-
-# # Call the OpenAI API to generate a response
-# response = openai.Completion.create(
-#   engine="davinci",
-#   prompt=prompt,
-#   max_tokens=10,
-# )
-
-# # Print the generated text
-# st.write(response.choices[0].text)
-
-
-
-
-
 #sdfghjk
 
 filename = 'sentiment_model.pkl'
@@ -101,18 +83,26 @@ try:
 
         # create MIDI file
         
+        midi_file = io.BytesIO()
+        melody.write('midi', fp=midi_file)
+        midi_file.seek(0)
+       
         mf = midi.translate.streamToMidiFile(melody)
         
-        midi_data = io.BytesIO()
-        # mf.writestr(midi_data)
-        st.write(midi_data)
-        midi_data.seek(0)
+        # midi_data = io.BytesIO()
+        ## mf.writestr(midi_data)
+        #st.write(midi_data)
+        #midi_data.seek(0)
         
-        st.download_button(
-            label='Download MIDI',
-            data=midi_data.getvalue(),
-            file_name='music.mid',
-            mime='audio/midi')
+        
+        st.download_button("Download MIDI", midi_file.read(), file_name="output.mid", mime="audio/midi")
+
+        
+        # st.download_button(
+        #     label='Download MIDI',
+        #     data=midi_data.getvalue(),
+        #     file_name='music.mid',
+        #     mime='audio/midi')
 
         # predict
         
@@ -161,19 +151,15 @@ try:
                 stop=None,
                 temperature=0.5,
             )
-            st.write(response.choices)
-            st.write(response.choices[0].text)
+            
             return response.choices[0].text
 
-        st.write(generate_response('i like pie!'))
         string = f"Give a caption for an image that is a metaphorical symbol of {emotion}:"
-        st.write(string)
         suggested_response = generate_response(string)
         suggested_response = suggested_response.split(":")[0]
         # suggested_response = suggested_response.strip().replace("'", "")    
         
-        st.write('response below')
-        st.write(suggested_response)    
+        st.write('Your mental state, visualized.')    
         
         # image gen
         response = openai.Image.create(
@@ -186,7 +172,7 @@ try:
         
         st.write(image_url)
         
-        st.image(image_url, caption="Generated image")        
+        st.image(image_url, caption=suggested_response)        
     
 except:
     pass
