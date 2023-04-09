@@ -128,32 +128,27 @@ try:
         
         emotion = user_set['predictions'].value_counts().idxmax()
         st.write(f'Your mental state is dominated by {emotion}.')
-
-        # midi_path = (make_music(get_key(get_ma_mi(user_set))))
-        # midi_audio = AudioSegment.from_file(midi_path, format="mid")
-        # play(midi_audio)
-        
-        # st.audio(midi_audio.export(format="mp3"), format="mp3")
-    
-
         
         # generate prompt
         
         def generate_response(prompt):
             response = openai.Completion.create(
-            engine="davinci",
-            prompt=prompt,
-            max_tokens=30,
-            n=1,
-            stop=None,
-            temperature=0.5,
-        )
+                engine="davinci",
+                prompt=prompt,
+                max_tokens=30,
+                n=1,
+                stop=None,
+                temperature=0.5,
+            )
+            
+            return response.choices[0].text
+
     
         string = f"Give a caption for an image that is a metaphorical symbol of {emotion}:"
         st.write(string)
         suggested_response = generate_response(string)
         suggested_response = suggested_response.split(":")[0]
-        suggested_response = suggested_response.strip().replace("'", "")    
+        # suggested_response = suggested_response.strip().replace("'", "")    
         
         st.write('response below')
         st.write(suggested_response)    
