@@ -132,7 +132,7 @@ try:
         def generate_response(prompt):
             st.write('is this being called?')
             response = openai.Completion.create(
-                engine="davinci",
+                engine="text-davinci-003",
                 prompt=prompt,
                 max_tokens=30,
                 n=1,
