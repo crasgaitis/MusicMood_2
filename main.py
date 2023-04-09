@@ -117,6 +117,7 @@ try:
             i = row.Index
             st.write(i)
             text = row.text
+            st.write(text)
             processed_text = preprocess_input_text(text)
             prediction = clf.predict(processed_text)
             user_set.loc[i, 'predictions'] = prediction
