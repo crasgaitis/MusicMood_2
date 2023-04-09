@@ -176,10 +176,18 @@ try:
         st.write('response below')
         st.write(suggested_response)    
         
-        
         # image gen
+        response = openai.Image.create(
+            prompt=suggested_response,
+            n=1,
+            size="512x512",
+        )
         
+        image_url = response['data'][0]['url']
         
+        st.write(image_url)
+        
+        st.image(image_url, caption="Generated image")        
     
 except:
     pass
