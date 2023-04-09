@@ -22,7 +22,8 @@ from transformers import AutoTokenizer
 os.environ["OPENAI_API_KEY"] = st.secrets['APIKEY']
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
-st.write('Mood Music')
+st.image("https://cdn.discordapp.com/attachments/1021852803905359984/1094549582622502932/final_music_mood_logo.png")
+st.header('Mood Music')
 
 #sdfghjk
 
@@ -37,17 +38,14 @@ with open('tfidf_vectorizer.pkl', 'rb') as f:
 
 def preprocess_input_text(text):
     # Tokenize input text
-    st.write('in')
-    
+
     encoded_text = tokenizer.encode(text, padding=True, truncation=True, return_tensors='tf')
     encoded_text = encoded_text.numpy()
-    
-    st.write(encoded_text)
 
     # Convert encoded text back into words
     words = [tokenizer.decode([token]) for token in encoded_text[0]]
     input_text = ' '.join(words)
-    st.write(input_text)
+
     vector = vectorizer.transform([input_text])
 
     return vector
@@ -57,7 +55,7 @@ try:
     user_set = pd.read_csv(user_set)
     user_set.drop('label', axis=1, inplace=True)
     
-    submit = st.button('Go')
+    submit = st.button('Submit')
     
     if submit:    
         analyze(user_set)  
@@ -81,32 +79,23 @@ try:
             note_obj.duration = duration.Duration(random.choice([0.25, 0.5, 1, 2]))
             melody.append(note_obj)
 
-        # create MIDI file
-        
-        midi_file = io.BytesIO()
-        melody.write('midi', fp=midi_file)
-        
-        st.write('there')
-        midi_file.seek(0)
-        
-        st.write('here')
-       
-        # mf = midi.translate.streamToMidiFile(melody)
-        
-        # midi_data = io.BytesIO()
-        ## mf.writestr(midi_data)
-        #st.write(midi_data)
-        #midi_data.seek(0)
-        
-        
-        st.download_button("Download MIDI", midi_file.read(), file_name="output.mid", mime="audio/midi")
+        # play
+        # melody.show('midi')
 
+        # create MIDI file
+               
+        mf = midi.translate.streamToMidiFile(melody)
         
-        # st.download_button(
-        #     label='Download MIDI',
-        #     data=midi_data.getvalue(),
-        #     file_name='music.mid',
-        #     mime='audio/midi')
+        midi_data = io.BytesIO()
+        # mf.writestr(midi_data)
+        st.write(midi_data)
+        midi_data.seek(0)
+        
+        st.download_button(
+            label='Download MIDI',
+            data=midi_data.getvalue(),
+            file_name='music.mid',
+            mime='audio/midi')
 
         # predict
         
@@ -114,9 +103,7 @@ try:
         
         for row in user_set.itertuples():
             i = row.Index
-            st.write(i)
             text = row.text
-            st.write(text)
             processed_text = preprocess_input_text(text)
             prediction = clf.predict(processed_text)
             user_set.loc[i, 'predictions'] = prediction
