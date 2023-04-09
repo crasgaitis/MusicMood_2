@@ -143,7 +143,7 @@ try:
             st.write(response.choices[0].text)
             return response.choices[0].text
 
-    
+        st.write(generate_response('i like pie!'))
         string = f"Give a caption for an image that is a metaphorical symbol of {emotion}:"
         st.write(string)
         suggested_response = generate_response(string)
