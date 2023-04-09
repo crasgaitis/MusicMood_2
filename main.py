@@ -38,14 +38,14 @@ with open('tfidf_vectorizer.pkl', 'rb') as f:
 
 def preprocess_input_text(text):
         # Tokenize input text
-        encoded_text = tokenizer.encode(text, padding=True, truncation=True, return_tensors='tf')
-        encoded_text = encoded_text.numpy()
+        encoded_text = tokenizer(text, padding=True, truncation=True, return_tensors='tf')
+        encoded_text = encoded_text['input_ids'].numpy()
 
         # Convert encoded text back into words
         words = [tokenizer.decode([token]) for token in encoded_text[0]]
         input_text = ' '.join(words)
         
-        vector = vectorizer.transform([input_text]).tocsr()
+        vector = vectorizer.transform([input_text])
 
         return vector
 
@@ -103,6 +103,7 @@ try:
         st.write('loading')
         
         for i, row in user_set.iterrows():
+            st.write(i)
             processed_text = preprocess_input_text(row['text'])
             prediction = clf.predict(processed_text)
             user_set.loc[i, 'predictions'] = prediction
