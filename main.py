@@ -28,6 +28,26 @@ openai.api_key = os.environ["OPENAI_API_KEY"]
 
 st.write('Mood Music')
 
+
+
+prompt = "Hello, OpenAI!"
+
+# Call the OpenAI API to generate a response
+response = openai.Completion.create(
+  engine="davinci",
+  prompt=prompt,
+  max_tokens=10,
+)
+
+# Print the generated text
+st.write(response.choices[0].text)
+
+
+
+
+
+#sdfghjk
+
 filename = 'sentiment_model.pkl'
 clf = pickle.load(open(filename, 'rb'))
 
