@@ -85,9 +85,13 @@ try:
         
         midi_file = io.BytesIO()
         melody.write('midi', fp=midi_file)
+        
+        st.write('there')
         midi_file.seek(0)
+        
+        st.write('here')
        
-        mf = midi.translate.streamToMidiFile(melody)
+        # mf = midi.translate.streamToMidiFile(melody)
         
         # midi_data = io.BytesIO()
         ## mf.writestr(midi_data)
