@@ -1,17 +1,10 @@
 from utils import get_key, get_ma_mi, analyze
 import streamlit as st 
-from pydub import AudioSegment
-from pydub.playback import play
 import openai
 import pickle
 from music21 import *
 import random
-import numpy as np
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from pydub import AudioSegment
-from pydub.playback import play
-import tempfile
-import pygame
 import io
 import pandas as pd
 import matplotlib.pyplot as plt
